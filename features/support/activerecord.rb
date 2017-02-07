@@ -14,5 +14,8 @@ class TestMigration < ActiveRecord::Migration
 end
 
 Before do
+  if [ActiveRecord::VERSION::MAJOR, ActiveRecord::VERSION::MINOR] > [4, 1]
+    ActiveRecord::Base.raise_in_transactional_callbacks = true
+  end
   TestMigration.up
 end
